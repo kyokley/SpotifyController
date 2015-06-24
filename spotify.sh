@@ -3,7 +3,7 @@
 # Get spotify window id, this works only if spotify is runnin and playing
 # There seems to be two instances of Spotify "windows", the other probably
 # being the systray icon
-id=$(xdotool search --name "Spotify Free")
+id=$(xdotool search --name "Spotify Premium")
 [ $? -ne 0 ] && echo "Failed" && exit 1
 
 # Track change request
