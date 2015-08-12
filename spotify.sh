@@ -1,38 +1,13 @@
 #!/bin/sh
 
+#I borrowed the following code from somewhere and cannot remember where it came from.
+#If this belongs to you, let me know so I can give the proper props!
+
 # Get spotify window id, this works only if spotify is runnin and playing
-# There seems to be two instances of Spotify "windows", the other probably
-# being the systray icon
 id=$(xdotool search --name "Spotify Premium")
 [ $? -ne 0 ] && echo "Failed" && exit 1
 
-# Track change request
-#if [ "$1" = "n" -o "$1" = "p" -o "$1" = "pause" ]; then
-  # So we want to change the track. First store current focused window
-  #cid=$(xdotool getwindowfocus)
-  # Make sure spotify window is not minimized, otherwise focus will fail
-  #xdotool windowmap $id
-  # Change focus to Spotify window
-  #xdotool windowfocus $id
-  # Send needed key strokes for next/previous track
+# Send keystrokes to control spotify
 [ "$1" = "n" ] && xdotool key --window $id Control_L+Right
 [ "$1" = "p" ] && xdotool key --window $id Control_L+Left
 [ "$1" = "pause" ] && xdotool key --window $id space
-  # And nicely return the focus to the window where we were before
-  #xdotool windowfocus $cid
-  # Wait for moment so that song title has time to change 
-  #sleep 1
-#fi
-
-# Resolve the song from full window title, which is in format "Spotify - Artist - Track"
-#title=$(xwininfo -id $id|grep xwininfo|cut -d\" -f2)
-#title="${title#*- }"
-# Pop up notification with song info
-#notify-send -i /usr/share/pixmaps/spotify-linux-48x48.png -t 2000 "$title"
-
-# Now playing to clipboard request
-#if [ "$1" = "np" ]; then 
-  # Push the title to clipboard with xclip and also to standard out
-  #echo "np: $title"|xclip -in
-  #echo "np: $title"
-#fi
